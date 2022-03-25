@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhaleLib", "WhaleLib\WhaleLib.csproj", "{67C82E51-83BC-4658-AF8C-32E8217B8D65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whale.Tests", "Whale.Tests\Whale.Tests.csproj", "{36CD531A-79EA-446D-8A4C-5DBB4B3A8283}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67C82E51-83BC-4658-AF8C-32E8217B8D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C82E51-83BC-4658-AF8C-32E8217B8D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C82E51-83BC-4658-AF8C-32E8217B8D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C82E51-83BC-4658-AF8C-32E8217B8D65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B0A4D17-FFD3-4B88-84B5-B6A9FBB5A7B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B0A4D17-FFD3-4B88-84B5-B6A9FBB5A7B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B0A4D17-FFD3-4B88-84B5-B6A9FBB5A7B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B0A4D17-FFD3-4B88-84B5-B6A9FBB5A7B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36CD531A-79EA-446D-8A4C-5DBB4B3A8283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36CD531A-79EA-446D-8A4C-5DBB4B3A8283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36CD531A-79EA-446D-8A4C-5DBB4B3A8283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36CD531A-79EA-446D-8A4C-5DBB4B3A8283}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
