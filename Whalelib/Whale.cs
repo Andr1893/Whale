@@ -93,13 +93,29 @@ public class Whale
     }
 
     //Methods gets
+
+
+    /// <summary>
+    /// Shows the current status of Whale Alert. 
+    /// Response lists all currently tracked blockchains, currencies and the current status for each blockchain. 
+    /// If Whale Alert is currently receiving data from a blockchain the status will be listed as "connected".
+    /// </summary>
+    /// <returns></returns>
     public Status getStatus()
     {
         IRestResponse response = connect(this._status);
 
         return errorReturn<Status>(response);
     }
-   
+
+    /// <summary>
+    /// Returns the transaction from a specific blockchain by hash. 
+    /// Blockchain inputs are: bitcoin, ethereum, ripple, neo, eos, tron and stellar. 
+    /// If a transaction consists of multiple OUTs, it is split into multiple transactions, provided the corresponding OUT is of high enough value (>=$10 USD).
+    /// </summary>
+    /// <param name="blockchain">The blockchain to search for the specific hash (lowercase)</param>
+    /// <param name="hash">The hash of the transaction to return</param>
+    /// <returns></returns>
     public Transactions GetTransactions(string blockchain, string hash)
     {
         string url = string.Format(this._transaction, blockchain, hash);
@@ -108,14 +124,30 @@ public class Whale
 
         return errorReturn<Transactions>(response);
     }
-    
+
+    /// <summary>
+    /// Returns transactions with timestamp after a set start time (excluding) in order in which they were added to our database. 
+    /// This timestamp is the execution time of the transaction on its respective blockchain. Some transactions might be reported with a small delay.
+    /// 
+    /// Use the cursor with the same start time when retrieving transactions in multiple or continuous requests 
+    /// (when retrieving the newest transactions or when the number of retrieved transactions is higher than the limit per result set).
+    ///
+    /// Low value transactions(<$10 USD) are periodically grouped per blockchain and per FROM and TO address owner to reduce data size.
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
     public Transactions GetTransactions(Parameters parameters)
     {
         IRestResponse response = connect(this._transactions, parameters);
 
         return errorReturn<Transactions>(response);
     }
-   
+
+    /// <summary>
+    /// Returns transactions with timestamp after a set start time (excluding) in order in which they were added to our database.
+    /// This timestamp is the execution time of the transaction on its respective blockchain. Some transactions might be reported with a small delay.
+    /// </summary>
+    /// <returns></returns>
     public Transactions GetTransactions()
     {
         IRestResponse response = connect(this._transactions);
