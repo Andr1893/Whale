@@ -2,14 +2,8 @@ using System;
 
 namespace Whalelib.Errors;
 
-public class WhaleExeception : SystemException
+public class WhaleExeception : Exception
 {
-    public readonly string MessageError;
-    public readonly int Code;
-
-    public WhaleExeception(string MessageError, int Code)
-    {
-        this.MessageError = MessageError;
-        this.Code = Code;
-    }
+    public WhaleExeception() : base() { }
+    public WhaleExeception(string message) : base(message) { }
 }

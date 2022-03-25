@@ -15,17 +15,11 @@ public class Whale
     private readonly string _transaction = "/v1/transaction/{0}/{1}";
     private readonly string _transactions = "/v1/transactions";
 
-
-
     //headers
     private readonly string _header = "X-WA-API-KEY";
-    private readonly string _apiKey = "Apikey";
+    private readonly string _apiKey;
 
-
-    public Whale(string apiKey)
-    {
-        this._apiKey = apiKey;
-    }
+    public Whale(string apiKey) => this._apiKey = apiKey;
 
     //Connect
     private IRestResponse connect(string url)
@@ -69,30 +63,29 @@ public class Whale
         return response;
     }
 
-
     //Errors
     private T errorReturn<T>(IRestResponse response)
     {
         switch (response.StatusCode)
         {
             case HttpStatusCode.BadRequest:
-                throw new WhaleExeception("Your request was not valid.", 400);
+                throw new WhaleExeception("Your request was not valid.");
             case HttpStatusCode.Unauthorized:
-                throw new WhaleExeception("No valid API key was provided.", 401);
+                throw new WhaleExeception("No valid API key was provided.");
             case HttpStatusCode.Forbidden:
-                throw new WhaleExeception("Access to this resource is restricted for the given caller.", 403);
+                throw new WhaleExeception("Access to this resource is restricted for the given caller.");
             case HttpStatusCode.NotFound:
-                throw new WhaleExeception("The requested resource does not exist.", 404);
+                throw new WhaleExeception("The requested resource does not exist.");
             case HttpStatusCode.MethodNotAllowed:
-                throw new WhaleExeception("An invalid method was used to access a resource.", 405);
+                throw new WhaleExeception("An invalid method was used to access a resource.");
             case HttpStatusCode.NotAcceptable:
-                throw new WhaleExeception("An unsupported format was requested.", 406);
+                throw new WhaleExeception("An unsupported format was requested.");
             case HttpStatusCode.TooManyRequests:
-                throw new WhaleExeception("You have exceeded the allowed number of calls per minute. Lower call frequency or upgrade your plan for a higher rate limit.", 429);
+                throw new WhaleExeception("You have exceeded the allowed number of calls per minute. Lower call frequency or upgrade your plan for a higher rate limit.");
             case HttpStatusCode.InternalServerError:
-                throw new WhaleExeception("There was a problem with the API host server. Try again later.", 500);
+                throw new WhaleExeception("There was a problem with the API host server. Try again later.");
             case HttpStatusCode.ServiceUnavailable:
-                throw new WhaleExeception("API is temporarily offline for maintenance. Try again later.", 503);
+                throw new WhaleExeception("API is temporarily offline for maintenance. Try again later.");
             case HttpStatusCode.OK:
             default:
                 return JsonConvert.DeserializeObject<T>(response.Content);
@@ -106,6 +99,7 @@ public class Whale
 
         return errorReturn<Status>(response);
     }
+   
     public Transactions GetTransactions(string blockchain, string hash)
     {
         string url = string.Format(this._transaction, blockchain, hash);
@@ -114,12 +108,14 @@ public class Whale
 
         return errorReturn<Transactions>(response);
     }
+    
     public Transactions GetTransactions(Parameters parameters)
     {
         IRestResponse response = connect(this._transactions, parameters);
 
         return errorReturn<Transactions>(response);
     }
+   
     public Transactions GetTransactions()
     {
         IRestResponse response = connect(this._transactions);

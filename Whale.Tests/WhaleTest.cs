@@ -1,20 +1,20 @@
 using Xunit;
 using Whalelib.Entity;
-
+using Whalelib.Errors;
 
 namespace Whale.Tests;
 
 public class WhaleTest
 {
-    Whalelib.Whale whale = new Whalelib.Whale("uODhGCOu5ycbPZf9XY8jFU2HFz9TwHpC");
 
+    Whalelib.Whale whale = new Whalelib.Whale("APIKEY");
 
     [Fact]
     public void Status_Test()
     {
        Status status =  whale.getStatus();
 
-       Assert.NotEqual("success",  status.Result);
+       Assert.Equal("success",  status.Result);
     }
 
     [Fact]
@@ -23,6 +23,14 @@ public class WhaleTest
         Transactions transactions = whale.GetTransactions();
 
         Assert.Equal("success", transactions.Result);
+    }
+
+    [Fact]
+    public void Error_Test()
+    {
+        var errorWhale = new Whalelib.Whale("");
+
+        Assert.Throws<WhaleExeception>(() => errorWhale.getStatus());
     }
 
 }
