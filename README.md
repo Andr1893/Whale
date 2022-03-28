@@ -10,5 +10,5 @@ Twitter: https://twitter.com/whale_alert
 # Installation
 
 ```sh
-dotnet add package Whale --version 1.0.0
+dotnet add package Whale --version 1.0.2
 ```
