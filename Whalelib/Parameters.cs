@@ -8,4 +8,6 @@ public class Parameters
     public int min_value { get; set; }
     public int limit { get; set; }
     public string currency { get; set; }
+
+    public Parameters(int start) => this.start = start;
 }

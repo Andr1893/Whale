@@ -51,11 +51,12 @@ public class Whale
 
 
         request.AddOrUpdateParameter("start", parameters.start);
-        request.AddOrUpdateParameter("end", parameters.start);
-        request.AddOrUpdateParameter("cursor", parameters.start);
-        request.AddOrUpdateParameter("min_value", parameters.start);
-        request.AddOrUpdateParameter("limit", parameters.start);
-        request.AddOrUpdateParameter("currency", parameters.start);
+        request.AddOrUpdateParameter("end", parameters.end);
+        request.AddOrUpdateParameter("cursor", parameters.cursor);
+        request.AddOrUpdateParameter("min_value", parameters.min_value);
+        request.AddOrUpdateParameter("limit", parameters.limit);
+        request.AddOrUpdateParameter("currency", parameters.currency);
+
 
         //get response
         var response = client.Get(request);
@@ -83,12 +84,14 @@ public class Whale
             case HttpStatusCode.TooManyRequests:
                 throw new WhaleExeception("You have exceeded the allowed number of calls per minute. Lower call frequency or upgrade your plan for a higher rate limit.");
             case HttpStatusCode.InternalServerError:
-                throw new WhaleExeception("There was a problem with the API host server. Try again later.");
+                throw new WhaleExeception("There was a problem with the API host server. Try again or later.");
             case HttpStatusCode.ServiceUnavailable:
-                throw new WhaleExeception("API is temporarily offline for maintenance. Try again later.");
+                throw new WhaleExeception("API is temporarily offline for maintenance. Try again or later.");
             case HttpStatusCode.OK:
-            default:
                 return JsonConvert.DeserializeObject<T>(response.Content);
+            default:
+                throw new WhaleExeception("Unexpected error. Try again or later.");
+                
         }
     }
 
@@ -101,7 +104,7 @@ public class Whale
     /// If Whale Alert is currently receiving data from a blockchain the status will be listed as "connected".
     /// </summary>
     /// <returns></returns>
-    public Status getStatus()
+    public Status GetStatus()
     {
         IRestResponse response = connect(this._status);
 
